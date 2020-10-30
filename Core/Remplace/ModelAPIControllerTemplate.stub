@@ -1,0 +1,129 @@
+<?php
+
+namespace App\Http\Controllers\API;
+
+use App\Models\$$MODEL$$;
+use App\Repositories\$$MODEL$$Repository;
+use Illuminate\Http\Request;
+use App\Http\Controllers\AppBaseController;
+use Response;
+
+/**
+ * Class $$MODEL$$Controller
+ * @package App\Http\Controllers\API
+ */
+
+class $$MODEL$$APIController extends AppBaseController
+{
+    /** @var  $$MODEL$$Repository */
+    private $$$MIN_MODEL$$Repository;
+
+    public function __construct($$MODEL$$Repository $$$MIN_MODEL$$Repo)
+    {
+        $this->$$MIN_MODEL$$Repository = $$$MIN_MODEL$$Repo;
+    }
+
+    /**
+     * Display a listing of the $$MODEL$$.
+     * GET|HEAD /$$MIN_MODEL$$s
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function index(Request $request)
+    {
+        $$$MIN_MODEL$$s = $this->$$MIN_MODEL$$Repository->all(
+            $request->except(['skip', 'limit']),
+            $request->get('skip'),
+            $request->get('limit')
+        );
+
+        return $this->sendResponse($$$MIN_MODEL$$s->toArray(), '$$MODEL$$ retrieved successfully');
+    }
+
+    /**
+     * Store a newly created $$MODEL$$ in storage.
+     * POST /$$MIN_MODEL$$s
+     *
+     * @param Create$$MODEL$$APIRequest $request
+     *
+     * @return Response
+     */
+    public function store(Request $request)
+    {
+        $input = $request->all();
+
+        $$$MIN_MODEL$$ = $this->$$MIN_MODEL$$Repository->create($input);
+
+        return $this->sendResponse($$$MIN_MODEL$$->toArray(), '$$MODEL$$ saved successfully');
+    }
+
+    /**
+     * Display the specified $$MODEL$$.
+     * GET|HEAD /$$MIN_MODEL$$s/{id}
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function show($id)
+    {
+        /** @var $$MODEL$$ $$$MIN_MODEL$$ */
+        $$$MIN_MODEL$$ = $this->$$MIN_MODEL$$Repository->find($id);
+
+        if (empty($$$MIN_MODEL$$)) {
+            return $this->sendError('$$MODEL$$ not found');
+        }
+
+        return $this->sendResponse($$$MIN_MODEL$$->toArray(), '$$MODEL$$ retrieved successfully');
+    }
+
+    /**
+     * Update the specified $$MODEL$$ in storage.
+     * PUT/PATCH /$$MIN_MODEL$$s/{id}
+     *
+     * @param int $id
+     * @param Update$$MODEL$$APIRequest $request
+     *
+     * @return Response
+     */
+    public function update($id, Request $request)
+    {
+        $input = $request->all();
+
+        /** @var $$MODEL$$ $$$MIN_MODEL$$ */
+        $$$MIN_MODEL$$ = $this->$$MIN_MODEL$$Repository->find($id);
+
+        if (empty($$$MIN_MODEL$$)) {
+            return $this->sendError('$$MODEL$$ not found');
+        }
+
+        $$$MIN_MODEL$$ = $this->$$MIN_MODEL$$Repository->update($input, $id);
+
+        return $this->sendResponse($$$MIN_MODEL$$->toArray(), '$$MODEL$$ updated successfully');
+    }
+
+    /**
+     * Remove the specified $$MODEL$$ from storage.
+     * DELETE /$$MIN_MODEL$$s/{id}
+     *
+     * @param int $id
+     *
+     * @throws \Exception
+     *
+     * @return Response
+     */
+    public function destroy($id)
+    {
+        /** @var $$MODEL$$ $$$MIN_MODEL$$ */
+        $$$MIN_MODEL$$ = $this->$$MIN_MODEL$$Repository->find($id);
+
+        if (empty($$$MIN_MODEL$$)) {
+            return $this->sendError('$$MODEL$$ not found');
+        }
+
+        $$$MIN_MODEL$$->delete();
+
+        return $this->sendResponse(null,'$$MODEL$$ deleted successfully');
+    }
+}

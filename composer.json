@@ -1,0 +1,28 @@
+{
+    "name": "patronrepository/repository",
+    "description":"Sistema de Patron de Repository API",
+    "type": "package",
+    "license": "MIT",
+    "authors":[
+        {
+            "name": "luisfruiz19",
+            "email": "luisfruiz19@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4":{
+            "PatronRepository\\Repository\\":"src/"
+        } 
+    },
+     "extra":{
+        "laravel":{
+            "providers" : [
+                "PatronRepository\\Repository\\PatronRepositoryServiceProvider"   
+            ]
+        }
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.3"
+    }
+}
