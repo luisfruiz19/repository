@@ -21,7 +21,7 @@ abstract class BaseAPIRepository{
     protected $with=[];
 
 
-    protected $oderColumns = [];
+    protected $orderColumns = [];
     protected $orderName = 'DESC';
 
     protected $betweenQueryCallBacks=[];
@@ -134,8 +134,8 @@ abstract class BaseAPIRepository{
             }
         }
 
-        foreach ($this->oderColumns as  $key => $column) {
-            $query->orderBy($key,$column);
+        foreach ($this->orderColumns as  $key => $column) {
+            $query->orderBy($column,$this->orderName);
         }
 
         if($this->textGlobalFilter!=null){
@@ -280,7 +280,7 @@ abstract class BaseAPIRepository{
     }
 
     protected function setOrders($arrayColumns){
-        $this->oderColumns = $arrayColumns ;
+        $this->orderColumns = $arrayColumns ;
     }
 
     protected function addWith($relation){
